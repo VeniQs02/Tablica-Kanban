@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -11,6 +14,8 @@
     "@types/react": "^18.2.38",
     "@types/react-dom": "^18.2.16",
     "axios": "^1.6.2",
+    "chakra": "^0.0.3",
+    "framer-motion": "^10.16.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -22,9 +27,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "move-build": "mkdir -p ../backend/src/main/resources/static && mv build/* ../backend/src/main/resources/static/",
-    "clean-old-build": "rm -rf ../backend/src/main/resources/static/* ",
-    "clean-new-build": "rm -rf build",
+    "move-build": "xcopy build ..\\backend\\src\\main\\resources\\static /s /e /y",
+    "clean-old-build": "del /S /Q ..\\backend\\src\\main\\resources\\static\\* ",
+    "clean-new-build": "rd /S /Q build",
     "postbuild": "npm run clean-old-build && npm run move-build && npm run clean-new-build"
   },
   "eslintConfig": {
