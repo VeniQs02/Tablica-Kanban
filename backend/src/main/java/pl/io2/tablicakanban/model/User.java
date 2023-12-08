@@ -5,10 +5,11 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "users", schema = "tablicakanban")
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, name = "id")
     private Long id;
 
     @Column(nullable = false)
