@@ -25,6 +25,7 @@ public class StickyNoteService {
 
     public StickyNote addStickyNote(StickyNoteDataTransferObject stickyNoteDto) {
         StickyNote stickyNote = getStickyNoteFromDto(stickyNoteDto);
+        boardService.addStickyNoteToBoardById(stickyNoteDto.getBoardId(), stickyNote);
         if (Objects.isNull(stickyNote)) {
             return null;
         }

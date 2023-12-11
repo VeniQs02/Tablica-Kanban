@@ -1,6 +1,5 @@
 package pl.io2.tablicakanban.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,15 +20,15 @@ public class StickyNote {
     @Column(nullable = false)
     private int columnId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "assignedUser")
     private User assignedUser;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "creator")
     private User creator;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "board")
     private Board board;
 

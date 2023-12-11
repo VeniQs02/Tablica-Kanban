@@ -1,6 +1,5 @@
 package pl.io2.tablicakanban.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,15 +23,15 @@ public class Board {
     @Column(nullable = false)
     String title;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "creator", referencedColumnName = "id")
     User creator;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany()
     @JoinColumn(name = "stickyNotes")
     List<StickyNote> stickyNotes;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany()
     @JoinColumn(name = "users")
     List<User> users;
 

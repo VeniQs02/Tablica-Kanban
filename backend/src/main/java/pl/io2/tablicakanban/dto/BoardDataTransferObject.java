@@ -6,8 +6,8 @@ public class BoardDataTransferObject {
     private Long id;
     private String title;
     private Long creatorId;
-    private List<Long> stickyNotesId;
-    private List<Long> usersId;
+    private List<Long> stickyNoteIds;
+    private List<Long> userIds;
 
     public Long getId() {
         return id;
@@ -33,19 +33,19 @@ public class BoardDataTransferObject {
         this.creatorId = creatorId;
     }
 
-    public List<Long> getStickyNotesId() {
-        return stickyNotesId;
+    public List<Long> getStickyNoteIds() {
+        return stickyNoteIds;
     }
 
-    public void setStickyNotesId(List<Long> stickyNotesId) {
-        this.stickyNotesId = stickyNotesId;
+    public void setStickyNoteIds(List<Long> stickyNoteIds) {
+        this.stickyNoteIds = stickyNoteIds;
     }
 
-    public List<Long> getUsersId() {
-        return usersId;
+    public List<Long> getUserIds() {
+        return userIds;
     }
 
-    public void setUsersId(List<Long> usersId) {
-        this.usersId = usersId;
+    public void setUserIds(List<Long> userIds) {
+        this.userIds = userIds;
     }
 }
