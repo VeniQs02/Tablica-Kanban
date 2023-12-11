@@ -2,20 +2,14 @@ package pl.io2.tablicakanban.services;
 
 import org.springframework.stereotype.Service;
 import pl.io2.tablicakanban.dto.StickyNoteDataTransferObject;
-import pl.io2.tablicakanban.exceptions.BoardNotFoundException;
 import pl.io2.tablicakanban.exceptions.StickyNoteNotFoundException;
-import pl.io2.tablicakanban.exceptions.UserNotFoundException;
-import pl.io2.tablicakanban.model.Board;
 import pl.io2.tablicakanban.model.StickyNote;
 import pl.io2.tablicakanban.model.User;
-import pl.io2.tablicakanban.repository.BoardRepo;
 import pl.io2.tablicakanban.repository.StickyNoteRepo;
-import pl.io2.tablicakanban.repository.UserRepo;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class StickyNoteService {
