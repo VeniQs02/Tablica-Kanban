@@ -13,7 +13,8 @@ const LoginButtonComponent = ({loggedIn}: Props) =>{
     }
 
     return (
-        <Button display={"flex"} justifyContent={"center"}>{loginButtonText}</Button>
+        <Button margin={"10px"} colorScheme="blue" variant={"outline"} display={"flex"} justifyContent={"center"}>
+            {loginButtonText}</Button>
     )
 
 }

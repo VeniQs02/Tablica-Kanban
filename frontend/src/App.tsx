@@ -1,35 +1,59 @@
-import LoginButtonComponent from "./components/LoginButtonComponent";
-import {Grid, GridItem} from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
+import { Grid, GridItem } from "@chakra-ui/react";
+import NavBarComponent from "./components/NavBarComponent";
+import AsideBarComponent from "./components/AsideBarComponent";
+import KanbanBoardComponent from "./components/KanbanBoardComponent";
+import "./App.css";
 
 function App() {
-  return (
-      <Grid templateAreas={{
-          base: '"nav nav" "aside main"'}}>
+    const [showAside, setShowAside] = useState(true);
 
-          <GridItem area={"nav"} backgroundColor={"red"}>
-              <LoginButtonComponent loggedIn={true} />
+    useEffect(() => {
+        const handleResize = () => {
+            setShowAside(window.innerWidth >= 992); // Adjust the breakpoint as needed
+        };
 
-                 {/*  03.12.2023
-                       powyżej masz przykładowy komponent który ma w środku interfejks
-                       czy jest zalogowany, jak chcesz możesz się pobawić podawaniem wartości
-                       do tego tagu. <Grid> jest głównym elementem zwracanym, pozwala on układać
-                       <GridItem>-y wg templatki którą dałem w parametrze
-                 */}
+        handleResize(); // Set initial state
 
-          </GridItem>
+        window.addEventListener("resize", handleResize);
 
-          <GridItem area={"aside"} backgroundColor={"yellow"} width={"20%"}>
-              <p>aside</p>
-          </GridItem>
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
-          <GridItem area={"main"} backgroundColor={"blue"} width={"100%"}>
-              <p>main</p>
-          </GridItem>
+    const gridTemplateColumns = showAside ? "200px 1fr" : "1fr";
 
+    return (
+        <Grid
+            templateAreas={{
+                base: '"nav" "main" "footer"',
+                lg: '"nav nav" "aside main" "aside footer"',
+            }}
+            gridTemplateColumns={gridTemplateColumns}
+            gridTemplateRows={"65px 1fr 65px"}
+            h="100%"
+            gap={2}
+            padding={2}
+        >
+            {/* dodać hamburger menu do wysuwania boardów na małych urządzeniach */}
+            <GridItem area={"nav"}>
+                <NavBarComponent loggedIn={true} />
+            </GridItem>
 
-      </Grid>
+            {showAside && (
+                <GridItem area={"aside"} backgroundColor={"gray.600"}>
+                    <AsideBarComponent />
+                </GridItem>
+            )}
 
-);
+            <GridItem area={"main"} backgroundColor={"gray.700"}>
+                <KanbanBoardComponent />
+            </GridItem>
+
+            <GridItem area={"footer"} backgroundColor={"gray.900"}></GridItem>
+        </Grid>
+    );
 }
 
 export default App;
