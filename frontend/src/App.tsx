@@ -1,8 +1,8 @@
-import NavBarComponent from "./components/NavBarComponent";
-import Homepage from "./components/Homepage";
-import LogIn from "./components/LogIn";
-import Registration from "./components/Registration";
-import UserAccount from "./components/UserAccount";
+import NavBarComponent from "./components/nav/NavBarComponent";
+import Homepage from "./components/home/Homepage";
+import LogIn from "./components/login/LogIn";
+import Registration from "./components/register/Registration";
+import UserAccount from "./components/userAccount/UserAccount";
 import {BrowserRouter, Route, Routes, Outlet} from "react-router-dom";
 
 function App() {
