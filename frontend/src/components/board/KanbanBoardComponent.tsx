@@ -1,4 +1,4 @@
-import fetchBoard from "../componentScripts/fetchBoard";
+import fetchBoard from "../../componentScripts/fetchBoard";
 import {useEffect, useState} from "react";
 import {Box} from "@chakra-ui/react";
 
