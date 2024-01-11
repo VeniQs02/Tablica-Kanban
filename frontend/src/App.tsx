@@ -1,19 +1,14 @@
-import NavBarComponent from "./components/NavBarComponent";
-import Homepage from "./components/Homepage";
-import LogIn from "./components/LogIn";
-import Registration from "./components/Registration";
-import UserAccount from "./components/UserAccount";
-import {BrowserRouter, Route, Routes, Outlet} from "react-router-dom";
+import Layout from "./pages/Layout";
+import Homepage from "./pages/Homepage";
+import LogIn from "./pages/LogIn";
+import Registration from "./pages/Registration";
+import UserAccount from "./pages/UserAccount";
+import Info from "./pages/Info";
+import Contact from "./pages/Contact";
+import NoPage from "./pages/NoPage";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 function App() {
-  const Layout = () => {
-    return(
-        <>
-          <NavBarComponent loggedIn={true}/>
-          <Outlet/>
-        </>
-    )
-  }
   return (
       <>
         <BrowserRouter>
@@ -23,6 +18,10 @@ function App() {
                     <Route path={"/register"} element={<Registration/>}/>
                     <Route path={"/login"} element={<LogIn/>}/>
                     <Route path={"/userAccount"} element={<UserAccount/>}/>
+                    <Route path={"/info"} element={<Info/>}/>
+                    <Route path={"/contact"} element={<Contact/>}/>
+                    <Route path={"*"} element={<NoPage/>} />
+                    {/*to powyżej to jest strona 404*/}
                 </Route>
             </Routes>
         </BrowserRouter>
