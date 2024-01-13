@@ -1,5 +1,6 @@
 import React from "react";
-import { VStack, Box, Heading, Text, Button, Link } from "@chakra-ui/react";
+import {VStack, Box, Heading, Text, Button, HStack} from "@chakra-ui/react";
+import {Link} from "react-router-dom";
 import kanbanBackground from "../../images/kanban_background.png";
 
 function Homepage() {
@@ -27,23 +28,25 @@ function Homepage() {
                         Streamline your project management and collaboration with our powerful Kanban board application.
                     </Text>
                     <VStack spacing={4} align="flex-end">
-                        <Link href="/boards" _hover={{ textDecoration: "none" }}>
+                        <Link to={"/boards"}>
                             <Button size="lg" width="200px" colorScheme="blue">
                                 Open Your Boards
                             </Button>
                         </Link>
-                        <Link href="/login" _hover={{ textDecoration: "none" }}>
+                        <Link to={"/login"}>
                             <Button size="lg" width="200px" variant="outline" colorScheme="blue">
                                 Log In
                             </Button>
                         </Link>
                     </VStack>
-                    <Text fontSize="md" color="gray.700">
-                        New to Kanballin?{" "}
-                        <Link href="/register" color="blue.300" fontWeight="bold">
-                            Sign Up Here
+                    <HStack>
+                        <Text color={"gray.700"}> New to Kanballin?{" "} </Text>
+                        <Link to="/register" >
+                            <Text color="blue.500">
+                                Sign In!
+                            </Text>
                         </Link>
-                    </Text>
+                    </HStack>
                 </VStack>
             </Box>
         </Box>

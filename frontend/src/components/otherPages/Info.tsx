@@ -47,7 +47,7 @@ function Info() {
             <Text fontSize="md" color="gray.600" textAlign="center">
                 Get started today by creating your first Kanban board and experience a new level of project management.
             </Text>
-            <Link href="/create-board" color="#3498db" fontSize="lg" fontWeight="bold">
+            <Link href="/boards" color="#3498db" fontSize="lg" fontWeight="bold">
                 Create Your First Board
             </Link>
         </VStack>
