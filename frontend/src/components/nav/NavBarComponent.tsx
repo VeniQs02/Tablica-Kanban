@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import LoginButtonComponent from "./LoginButtonComponent";
 import {HStack, Text, Box } from "@chakra-ui/react";
 import { BsPersonCircle, BsFillEnvelopeOpenFill, BsInfoCircle, BsSliders } from "react-icons/bs";
-import '../componentStyles/NavBarStyle.css';
+import '../../componentStyles/NavBarStyle.css';
 
 
 
@@ -46,7 +46,7 @@ const NavbarComponent = ({loggedIn}: Props) =>{
                   </Link>
               </Box>
 
-              <LoginButtonComponent loggedIn={true} />
+              <LoginButtonComponent loggedIn={false} />
           {/*    tutaj trzeba bedzie wsadzić children abuse i zrobić żeby do środka
           wchodziło register i login jeżeli nie jest zalogowany     */}
           </HStack>

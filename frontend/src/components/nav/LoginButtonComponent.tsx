@@ -1,4 +1,5 @@
 import {Button} from '@chakra-ui/react'
+import {Link} from "react-router-dom";
 
 interface Props{
     loggedIn: boolean;
@@ -14,7 +15,8 @@ const LoginButtonComponent = ({loggedIn}: Props) =>{
 
     return (
         <Button margin={"10px"} colorScheme="blue" variant={"outline"} display={"flex"} justifyContent={"center"}>
-            {loginButtonText}</Button>
+            <Link to={"/login"}>{loginButtonText}</Link>
+        </Button>
     )
 
 }

@@ -1,12 +1,13 @@
-import Layout from "./pages/Layout";
-import Homepage from "./pages/Homepage";
-import LogIn from "./pages/LogIn";
-import Registration from "./pages/Registration";
-import UserAccount from "./pages/UserAccount";
-import Info from "./pages/Info";
-import Contact from "./pages/Contact";
-import NoPage from "./pages/NoPage";
+import Layout from "./components/otherPages/Layout";
+import Homepage from "./components/home/Homepage";
+import LogIn from "./components/login/LogIn";
+import Registration from "./components/register/Registration";
+import UserAccount from "./components/userAccount/UserAccount";
+import Info from "./components/otherPages/Info";
+import Contact from "./components/otherPages/Contact";
+import NoPage from "./components/otherPages/NoPage";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import "./pageStyles/AppStyle.css"
 
 function App() {
   return (
@@ -21,7 +22,6 @@ function App() {
                     <Route path={"/info"} element={<Info/>}/>
                     <Route path={"/contact"} element={<Contact/>}/>
                     <Route path={"*"} element={<NoPage/>} />
-                    {/*to powyżej to jest strona 404*/}
                 </Route>
             </Routes>
         </BrowserRouter>
