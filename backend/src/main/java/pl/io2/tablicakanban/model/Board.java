@@ -24,7 +24,7 @@ public class Board {
     String title;
 
     @OneToOne()
-    @JoinColumn(name = "creator", referencedColumnName = "id")
+    @JoinColumn(name = "creator_id", referencedColumnName = "id")
     User creator;
 
     @OneToMany()
@@ -32,7 +32,6 @@ public class Board {
     List<StickyNote> stickyNotes;
 
     @OneToMany()
-    @JoinColumn(name = "users")
     List<User> users;
 
     public Board() {
