@@ -7,6 +7,7 @@ import pl.io2.tablicakanban.repository.UserRepo;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -41,7 +42,7 @@ public class UserService {
         );
     }
 
-    public User findUserByUsername(String username) {
+    public Optional<User> findUserByUsername(String username) {
         return userRepo.findUserByUsername(username);
     }
 
