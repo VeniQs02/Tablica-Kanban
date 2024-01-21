@@ -1,9 +1,34 @@
 // LogIn.js
-import React from "react";
+import React, {ChangeEvent, FormEvent, useState} from "react";
 import {VStack, Box, Heading, FormControl, FormLabel, Input, Button, Text, HStack} from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
+
+import axios from "axios";
 
 function LogIn() {
+    const [formData, setFormData] = useState({
+        username: "",
+        password: "",
+    });
+
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const {id, value} = e.target;
+        setFormData((prevData) => ({...prevData, [id]: value}));
+    };
+
+    const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        try {
+            const response = await axios.post("auth/login", formData);
+
+            console.log("Login successful. Token:", response.data.token);
+        } catch (error) {
+            // Handle login error
+            console.error("Error logging in:", error);
+        }
+    };
+
     return (
         <VStack spacing={8} align="center" mt={8}>
             <Box>
@@ -12,21 +37,25 @@ function LogIn() {
                 </Heading>
             </Box>
             <Box width="300px">
-                <FormControl id="email" mb={4}>
-                    <FormLabel>Email address</FormLabel>
-                    <Input type="email" placeholder="Enter your email" />
-                </FormControl>
-                <FormControl id="password" mb={6}>
-                    <FormLabel>Password</FormLabel>
-                    <Input type="password" placeholder="Enter your password" />
-                </FormControl>
-                <Button colorScheme="blue" width="100%" mb={4}>
-                    Log In
-                </Button>
+                <form onSubmit={handleLogin}>
+                    <FormControl id="username" mb={4}>
+                        <FormLabel>Username</FormLabel>
+                        <Input type="username" placeholder="Enter your username" id="username"
+                               onChange={handleInputChange} value={formData.username}/>
+                    </FormControl>
+                    <FormControl id="password" mb={6}>
+                        <FormLabel>Password</FormLabel>
+                        <Input type="password" placeholder="Enter your password" id="password"
+                               onChange={handleInputChange} value={formData.password}/>
+                    </FormControl>
+                    <Button type="submit" colorScheme="blue" width="100%" mb={4}>
+                        Log In
+                    </Button>
+                </form>
                 <Text>
                     <HStack>
                         <Text> Don't have an account?{" "} </Text>
-                        <Link to="/register" >
+                        <Link to="/register">
                             <Text color="blue.500">
                                 Sign Up!
                             </Text>
