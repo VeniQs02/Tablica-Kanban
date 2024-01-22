@@ -38,4 +38,15 @@ public class AuthController {
         String jwt = jwtTokenProvider.generateJwtToken(userLoginDetails);
         return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
+
+    @PostMapping("/expire")
+    public ResponseEntity<?> hasUserTokenExpired(@RequestBody String userToken) {
+        JwtTokenProvider jwtTokenProvider = new JwtTokenProvider();
+        boolean hasTokenExpired = jwtTokenProvider.hasTokenExpired(userToken);
+        if (hasTokenExpired) {
+            return new ResponseEntity<>(hasTokenExpired, HttpStatus.UNAUTHORIZED);
+        } else {
+            return new ResponseEntity<>(hasTokenExpired, HttpStatus.OK);
+        }
+    }
 }

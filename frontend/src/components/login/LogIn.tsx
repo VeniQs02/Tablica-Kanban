@@ -21,8 +21,6 @@ function LogIn() {
 
         try {
             const response = await axios.post("auth/login", formData);
-            localStorage.setItem('jwtToken', response.data);
-            console.log("Login successful. Token saved in local storage");
 
             // sposób na odzyskanie JWT Tokenu
             // const storedToken = localStorage.getItem('jwtToken');
@@ -34,7 +32,10 @@ function LogIn() {
                 // TODO dodać popup jakiś
                 return;
             }
-            // TODO: przekierować na stronę użytkownika/główną stronę, na tym etapie użytkownik jest zalogowany
+
+            localStorage.setItem('jwtToken', response.data);
+            console.log("Login successful. Token saved in local storage");
+            window.location.replace("/home") // or userAccount
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 if (error.response && error.response.status === 401) {

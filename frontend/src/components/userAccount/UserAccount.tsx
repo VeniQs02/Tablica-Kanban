@@ -2,34 +2,66 @@ import React from "react";
 import { Box, Text, Button, VStack, HStack } from "@chakra-ui/react";
 import { BsPerson, BsEnvelope, BsGear } from "react-icons/bs";
 import { BiKey } from "react-icons/bi";
+import hasUserTokenExpired from "../auth/Auth";
 
 function UserAccount() {
+    const loggedInUser = {
+        name: "Zalogowany user #1",
+        email: "userLoggedIn@example.com",
+    };
+    const storedToken = localStorage.getItem('jwtToken');
+    console.log("stored token " + storedToken)
+
+    let redirectToLoginPage = false;
+    if (storedToken === null || storedToken.length === 0) {
+        // Token does not exist, redirect to login page
+        redirectToLoginPage = true;
+        console.log("User token does not exist in local storage")
+    } else {
+        // Check if user token has expired. If it did, redirect to login page.
+        hasUserTokenExpired(storedToken).then((result) => {
+            if (result) {
+                redirectToLoginPage = true;
+                console.log('User token has expired');
+            }
+        });
+    }
+
+    if (redirectToLoginPage) {
+        window.location.replace("/login")
+    }
+
+    const dummy_user = {
+        name: "John Doe",
+        email: "john.doe@example.com",
+    };
+
     return (
         <VStack spacing={4} align="center" mt={8}>
             <Box>
-                <BsPerson size={48} />
+                <BsPerson size={48}/>
             </Box>
             <Text fontSize="xl" fontWeight="bold">
-                John Doe
+                {loggedInUser ? loggedInUser.name : dummy_user.name}
             </Text>
             <Text fontSize="md" color="gray.500">
-                john.doe@example.com
+                {loggedInUser ? loggedInUser.email : dummy_user.email}
             </Text>
             <Button width={"200px"} justifyContent="space-between">
                 <HStack spacing={3}>
-                    <BsEnvelope />
+                    <BsEnvelope/>
                     <Text>Change Email</Text>
                 </HStack>
             </Button>
             <Button width={"200px"} justifyContent="space-between">
                 <HStack spacing={2}>
-                    <BiKey size={20} />
+                    <BiKey size={20}/>
                     <Text>Change Password</Text>
                 </HStack>
             </Button>
             <Button width={"200px"} justifyContent="space-between">
                 <HStack spacing={3}>
-                    <BsGear />
+                    <BsGear/>
                     <Text>Account Settings</Text>
                 </HStack>
             </Button>

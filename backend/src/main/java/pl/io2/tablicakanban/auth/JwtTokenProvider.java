@@ -52,6 +52,23 @@ public class JwtTokenProvider {
                 .parseClaimsJws(token).getBody().getSubject();
     }
 
+    public boolean hasTokenExpired(String authToken) {
+        boolean result = true;
+        try {
+            Date expirationDate = Jwts.parserBuilder().setSigningKey(key()).build()
+                    .parseClaimsJws(authToken).getBody().getExpiration();
+            Date currentDate = new Date();
+            if (expirationDate.compareTo(currentDate) >= 0) {
+                result = false;
+            }
+        } catch (MalformedJwtException e) {
+            System.out.println("Invalid JWT token: " + e.getMessage());
+        } catch (ExpiredJwtException e) {
+            System.out.println("JWT token is expired: " + e.getMessage());
+        }
+        return result;
+    }
+
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parserBuilder().setSigningKey(key()).build().parse(authToken);
