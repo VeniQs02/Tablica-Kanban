@@ -19,7 +19,7 @@ const NavbarComponent = ({loggedIn}: Props) =>{
                       <Link to={"/home"}>
                           <Text fontSize={"30px"} margin={"10px"} _hover={{
                               color: "blue.300",
-                          }}>Kanballin</Text>
+                          }}>Kanball</Text>
                       </Link>
                   </Box>
               </Box>

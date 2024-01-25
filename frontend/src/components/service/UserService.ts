@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import NavBarComponent from "../nav/NavBarComponent";
 
 const userService = {
     hasUserTokenExpired,
     login,
-    getUserData
+    getUserData,
+    changeEmail,
+    changePassword
 }
 
 async function hasUserTokenExpired(storedToken: String): Promise<boolean> {
@@ -97,6 +100,20 @@ function getUserData() {
     }
 
     return userData;
+}
+
+function changeEmail(formData: any) {
+    console.log(formData)
+    console.log(JSON.stringify(formData))
+    window.alert('Changing email')
+    // const response = await axios.post("auth/login", formData);
+}
+
+function changePassword(formData: any) {
+    console.log(formData)
+    console.log(JSON.stringify(formData))
+    window.alert('Changing password!')
+    // const response = await axios.post("auth/login", formData);
 }
 
 export default userService;

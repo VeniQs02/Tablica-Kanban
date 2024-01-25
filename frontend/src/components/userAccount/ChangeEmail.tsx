@@ -1,20 +1,34 @@
-
-
 import {VStack, Text, Button, HStack, FormControl, Input, FormHelperText} from "@chakra-ui/react";
+import userService from "../service/UserService";
+import {ChangeEvent, FormEvent, useState} from "react";
 
 const ChangeEmail = () => {
-    // Add logic for changing the email
+    const [formData, setFormData] = useState({
+        email: "",
+    });
+
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const {id, value} = e.target;
+        setFormData((prevData) => ({...prevData, [id]: value}));
+    };
+
+    const handleEmailChange = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        await userService.changeEmail(formData)
+    };
 
     return (
         <VStack spacing={4} align="center" mt={8}>
             <Text fontSize="xl" fontWeight="bold">
                 Change Email
             </Text>
-            <FormControl  width={"200px"}>
-                <Input type='email' />
-                <FormHelperText>REMEMBER - We'll never share your email.</FormHelperText>
-            </FormControl>
-            <Button width={"200px"}> Change! </Button>
+            <form onSubmit={handleEmailChange}>
+                <FormControl width={"200px"}>
+                    <Input type='email' id='email' onChange={handleInputChange} value={formData.email}/>
+                    <FormHelperText>REMEMBER - We'll never share your email.</FormHelperText>
+                </FormControl>
+                <Button width={"200px"} type="submit"> Change! </Button>
+            </form>
         </VStack>
     );
 };
