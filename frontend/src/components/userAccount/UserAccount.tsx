@@ -3,6 +3,7 @@ import { Box, Text, Button, VStack, HStack } from "@chakra-ui/react";
 import { BsPerson, BsEnvelope, BsGear } from "react-icons/bs";
 import { BiKey } from "react-icons/bi";
 import userService from "../service/UserService";
+import {Link} from "react-router-dom";
 
 function UserAccount() {
     const loggedInUser = userService.getUserData();
@@ -48,22 +49,28 @@ function UserAccount() {
                 {loggedInUser ? loggedInUser.email : dummy_user.email}
             </Text>
             <Button width={"200px"} justifyContent="space-between">
-                <HStack spacing={3}>
-                    <BsEnvelope/>
-                    <Text>Change Email</Text>
-                </HStack>
+                <Link to={"/changeEmail"}>
+                    <HStack spacing={3}>
+                        <BsEnvelope/>
+                        <Text>Change Email</Text>
+                    </HStack>
+                </Link>
             </Button>
             <Button width={"200px"} justifyContent="space-between">
-                <HStack spacing={2}>
-                    <BiKey size={20}/>
-                    <Text>Change Password</Text>
-                </HStack>
+                <Link to={"/changePassword"}>
+                    <HStack spacing={2}>
+                        <BiKey size={20}/>
+                        <Text>Change Password</Text>
+                    </HStack>
+                </Link>
             </Button>
             <Button width={"200px"} justifyContent="space-between">
-                <HStack spacing={3}>
-                    <BsGear/>
-                    <Text>Account Settings</Text>
-                </HStack>
+                <Link to={"/404"}>
+                    <HStack spacing={3}>
+                        <BsGear/>
+                        <Text>Account Settings</Text>
+                    </HStack>
+                </Link>
             </Button>
         </VStack>
     );

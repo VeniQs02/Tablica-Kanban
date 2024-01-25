@@ -8,6 +8,8 @@ import Contact from "./components/otherPages/Contact";
 import NoPage from "./components/otherPages/NoPage";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import "./pageStyles/AppStyle.css"
+import ChangeEmail from "./components/userAccount/ChangeEmail";
+import ChangePassword from "./components/userAccount/ChangePassword";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
                     <Route path={"/userAccount"} element={<UserAccount/>}/>
                     <Route path={"/info"} element={<Info/>}/>
                     <Route path={"/contact"} element={<Contact/>}/>
+                    <Route path={"/changePassword"} element={<ChangePassword/>}/>
+                    <Route path={"/changeEmail"} element={<ChangeEmail/>}/>
                     <Route path={"*"} element={<NoPage/>} />
                 </Route>
             </Routes>
