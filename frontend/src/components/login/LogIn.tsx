@@ -2,8 +2,7 @@
 import React, {ChangeEvent, FormEvent, useState} from "react";
 import {VStack, Box, Heading, FormControl, FormLabel, Input, Button, Text, HStack} from "@chakra-ui/react";
 import {Link} from "react-router-dom";
-
-import axios from "axios";
+import userService from "../service/UserService";
 
 function LogIn() {
     const [formData, setFormData] = useState({
@@ -18,37 +17,7 @@ function LogIn() {
 
     const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-
-        try {
-            const response = await axios.post("auth/login", formData);
-
-            // sposób na odzyskanie JWT Tokenu
-            // const storedToken = localStorage.getItem('jwtToken');
-            // console.log("stored token " + storedToken)
-
-            if (response.status === 204) {
-                console.log('User with the given username does not exist');
-                window.alert('User with the given username does not exist!')
-                // TODO dodać popup jakiś
-                return;
-            }
-
-            localStorage.setItem('jwtToken', response.data);
-            console.log("Login successful. Token saved in local storage");
-            window.location.replace("/home") // or userAccount
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                if (error.response && error.response.status === 401) {
-                    console.log('Incorrect password');
-                    window.alert('Incorrect password!')
-                    // TODO dodać popup jakiś
-                } else {
-                    console.error('Error logging in: ', error);
-                }
-            } else {
-                console.error('Received exception is not an instance of an AxiosError');
-            }
-        }
+        await userService.login(formData)
     };
 
     return (

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.io2.tablicakanban.auth.JwtTokenProvider;
+import pl.io2.tablicakanban.dto.UserBrowserLocalStorage;
 import pl.io2.tablicakanban.dto.UserLoginDetails;
 import pl.io2.tablicakanban.model.User;
 import pl.io2.tablicakanban.services.UserService;
@@ -36,7 +37,13 @@ public class AuthController {
         }
         JwtTokenProvider jwtTokenProvider = new JwtTokenProvider();
         String jwt = jwtTokenProvider.generateJwtToken(userLoginDetails);
-        return new ResponseEntity<>(jwt, HttpStatus.OK);
+        UserBrowserLocalStorage userLocalStorage = new UserBrowserLocalStorage();
+        userLocalStorage.setJwtToken(jwt);
+        userLocalStorage.setUsername(user.getUsername());
+        userLocalStorage.setFirstName(user.getFirstName());
+        userLocalStorage.setLastName(user.getLastName());
+        userLocalStorage.setEmail(user.getEmail());
+        return new ResponseEntity<>(userLocalStorage, HttpStatus.OK);
     }
 
     @PostMapping("/expire")
