@@ -1,6 +1,4 @@
-import React, {useEffect, useState} from "react";
 import axios from "axios";
-import NavBarComponent from "../nav/NavBarComponent";
 
 const userService = {
     hasUserTokenExpired,
@@ -102,18 +100,74 @@ function getUserData() {
     return userData;
 }
 
-function changeEmail(formData: any) {
-    console.log(formData)
-    console.log(JSON.stringify(formData))
-    window.alert('Changing email')
-    // const response = await axios.post("auth/login", formData);
+async function changeEmail(formData: any) {
+    const userData = {
+        username: "",
+        email: "",
+    };
+
+    const loggedInUser = getUserData();
+    console.log(loggedInUser)
+    if (!(loggedInUser)) {
+        console.log("Could not fetch user data!")
+    }
+    userData.username = loggedInUser.username;
+    userData.email = formData.email;
+    console.log(userData)
+    try {
+        const response = await axios.post("user/changeEmail", userData);
+        if (response.status === 200) {
+            console.log('Email changed successfully!');
+            window.alert('Email changed successfully!')
+            return;
+        }
+        console.log("Possible DB connection issues or some other error occured")
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            if (error.response && error.response.status === 304) {
+                console.log('Email could not be changed.');
+                window.alert('Email could not be changed.')
+                return;
+            }
+            console.error('Error changing email: ', error);
+        } else {
+            console.error('Received exception is not an instance of an AxiosError');
+        }
+    }
 }
 
-function changePassword(formData: any) {
-    console.log(formData)
-    console.log(JSON.stringify(formData))
-    window.alert('Changing password!')
-    // const response = await axios.post("auth/login", formData);
+async function changePassword(formData: any) {
+    const userData = {
+        username: "",
+        password: "",
+    };
+
+    const storedUserData = localStorage.getItem('loggedInUser');
+
+    if (storedUserData) {
+        let parsedUserData = JSON.parse(storedUserData);
+        userData.username = parsedUserData.username
+    }
+    userData.password = formData.password;
+    try {
+        const response = await axios.post("user/changePassword", userData);
+        if (response.status === 200) {
+            console.log('Password changed successfully!');
+            window.alert('Password changed successfully!')
+            return;
+        }
+        console.log("Possible DB connection issues or some other error occured")
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            if (error.response && error.response.status === 304) {
+                console.log('Password could not be changed.');
+                window.alert('Password could not be changed.')
+                return;
+            }
+        } else {
+            console.error('Received exception is not an instance of an AxiosError');
+        }
+    }
 }
 
 export default userService;

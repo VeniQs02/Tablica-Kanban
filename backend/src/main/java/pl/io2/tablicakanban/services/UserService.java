@@ -1,6 +1,8 @@
 package pl.io2.tablicakanban.services;
 
 import org.springframework.stereotype.Service;
+import pl.io2.tablicakanban.dto.UserEmailChangeDTO;
+import pl.io2.tablicakanban.dto.UserPasswordChangeDTO;
 import pl.io2.tablicakanban.exceptions.UserNotFoundException;
 import pl.io2.tablicakanban.model.User;
 import pl.io2.tablicakanban.repository.UserRepo;
@@ -40,6 +42,34 @@ public class UserService {
         return userRepo.findUserById(id).orElseThrow(
                 () -> new UserNotFoundException("User by id " + id + " was not found")
         );
+    }
+
+    public boolean changePassword(UserPasswordChangeDTO userPasswordChangeDTO) {
+        boolean result = true;
+        String username = userPasswordChangeDTO.getUsername();
+        Optional<User> userByUsername = findUserByUsername(username);
+        if (userByUsername.isPresent()) {
+            User user = userByUsername.get();
+            user.setPassword(userPasswordChangeDTO.getPassword());
+            updateUser(user);
+        } else {
+            result = false;
+        }
+        return result;
+    }
+
+    public boolean changeEmail(UserEmailChangeDTO userEmailChangeDTO) {
+        boolean result = true;
+        String username = userEmailChangeDTO.getUsername();
+        Optional<User> userByUsername = findUserByUsername(username);
+        if (userByUsername.isPresent()) {
+            User user = userByUsername.get();
+            user.setEmail(userEmailChangeDTO.getEmail());
+            updateUser(user);
+        } else {
+            result = false;
+        }
+        return result;
     }
 
     public Optional<User> findUserByUsername(String username) {

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.io2.tablicakanban.dto.UserEmailChangeDTO;
+import pl.io2.tablicakanban.dto.UserPasswordChangeDTO;
 import pl.io2.tablicakanban.model.User;
 import pl.io2.tablicakanban.services.UserService;
 
@@ -58,5 +60,25 @@ public class UserController {
     public ResponseEntity<?> updateUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/changeEmail")
+    public ResponseEntity<?> changeUserEmail(UserEmailChangeDTO userEmailChangeDTO) {
+        boolean result = userService.changeEmail(userEmailChangeDTO);
+        if (result) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        }
+    }
+
+    @PostMapping("/changePassword")
+    public ResponseEntity<?> changeUserPassword(UserPasswordChangeDTO userPasswordChangeDTO) {
+        boolean result = userService.changePassword(userPasswordChangeDTO);
+        if (result) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        }
     }
 }
